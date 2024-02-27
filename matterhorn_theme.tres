@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c8oml654oxorc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0n51"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.101961, 0.101961, 0.121569, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2vf43"]
+
+[resource]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_i0n51")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_2vf43")

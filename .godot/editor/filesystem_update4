@@ -1,0 +1,8 @@
+res://Scenes/main_ui.tscn
+res://matterhorn_theme.tres
+res://Scenes/Mod.tscn
+res://Scripts/MatterhornFileIO.gd
+res://Scripts/Mods.gd
+res://Scripts/Mod.gd
+res://Scenes/MainUI.tscn
+res://Scenes/Instance.tscn

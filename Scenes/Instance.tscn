@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://bs0mwanijmsiw"]
+
+[ext_resource type="Script" path="res://Scripts/Mod.gd" id="1_wbwm7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_04uug"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_7kj2t"]
+font_size = 20
+font_color = Color(0.458824, 0.458824, 0.458824, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yhwcl"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_exx58"]
+font_size = 12
+
+[node name="Instance" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_wbwm7")
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleBar" type="GridContainer" parent="GridContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Name" type="Label" parent="GridContainer/TitleBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mod Name"
+label_settings = SubResource("LabelSettings_04uug")
+
+[node name="Dot" type="Label" parent="GridContainer/TitleBar"]
+layout_mode = 2
+text = "•"
+label_settings = SubResource("LabelSettings_7kj2t")
+
+[node name="Version" type="Label" parent="GridContainer/TitleBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0.0.0
+"
+label_settings = SubResource("LabelSettings_7kj2t")
+
+[node name="Author" type="Label" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mod Author"
+label_settings = SubResource("LabelSettings_yhwcl")
+
+[node name="Description" type="Label" parent="GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mod description. This can be quite long, but don't worry! The area should just expand to fit it, so a long description is fine."
+label_settings = SubResource("LabelSettings_exx58")
+autowrap_mode = 2

@@ -1,0 +1,133 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpy1unhc3431j"]
+
+[ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
+[ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
+[ext_resource type="Texture2D" uid="uid://dmac57f5v1q6j" path="res://Backgrounds/background1_blur.png" id="3_rdlrl"]
+[ext_resource type="Script" path="res://Scripts/Mods.gd" id="5_hda4r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0kt58"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_iumfn"]
+font_size = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pr574"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwovn"]
+
+[node name="MainUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kmsrw")
+script = ExtResource("2_nwuoh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rdlrl")
+expand_mode = 3
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="LeftSide" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+alignment = 1
+
+[node name="LogoContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Logo" type="Label" parent="MarginContainer/HBoxContainer/LeftSide/LogoContainer"]
+layout_mode = 2
+text = "Matterhorn"
+label_settings = SubResource("LabelSettings_0kt58")
+
+[node name="BottomArea" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Instances" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/Instances"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/Instances/VBoxContainer"]
+layout_mode = 2
+text = "Instances"
+label_settings = SubResource("LabelSettings_iumfn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/Instances/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/Instances/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Instance" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/Instances/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/Instances/VBoxContainer/ScrollContainer/VBoxContainer/Instance"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/Instances/VBoxContainer/ScrollContainer/VBoxContainer/Instance/VBoxContainer"]
+layout_mode = 2
+text = "Epic Cool Fuji Instance ( •̀ ω •́ )b"
+
+[node name="Path" type="RichTextLabel" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/Instances/VBoxContainer/ScrollContainer/VBoxContainer/Instance/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[i][color=727272][font_size=12]D:/Big Games/Celeste64-Fuji[/font_size][/color][/i]"
+fit_content = true
+shortcut_keys_enabled = false
+
+[node name="Placeholder" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pr574")
+
+[node name="RightSide" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_uwovn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/RightSide"]
+layout_mode = 2
+
+[node name="Mods" type="GridContainer" parent="MarginContainer/HBoxContainer/RightSide/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_hda4r")
