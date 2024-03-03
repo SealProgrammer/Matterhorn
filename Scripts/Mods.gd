@@ -17,7 +17,5 @@ func populate_modlist(directory: String) -> void:
 		add_child(new_mod)
 
 
-
-# TODO: Remove this
-func _ready():
-	populate_modlist("D:/Big Games/Celeste64-Fuji")
+func _on_new_instance_selection(path):
+	populate_modlist(path)

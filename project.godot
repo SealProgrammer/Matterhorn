@@ -15,13 +15,15 @@ config/description="Manage and install Celeste 64: Fragments of the Mountain mod
 config/version="0.1"
 run/main_scene="res://Scenes/MainUI.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [display]
 
 window/size/viewport_width=1100
 window/size/viewport_height=600
-window/stretch/scale=2.0
+window/subwindows/embed_subwindows=false
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [file_customization]
 

@@ -1,8 +1,6 @@
-res://Scenes/main_ui.tscn
-res://matterhorn_theme.tres
-res://Scenes/Mod.tscn
-res://Scripts/MatterhornFileIO.gd
-res://Scripts/Mods.gd
-res://Scripts/Mod.gd
 res://Scenes/MainUI.tscn
+res://Scripts/MainUI.gd
+res://matterhorn_theme.tres
 res://Scenes/Instance.tscn
+res://Scenes/Mod.tscn
+res://Scenes/InstallFujiPopup.gd

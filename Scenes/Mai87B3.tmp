@@ -31,8 +31,9 @@ corner_radius_bottom_left = 10
 [sub_resource type="LabelSettings" id="LabelSettings_a51gv"]
 font_size = 20
 
-[sub_resource type="LabelSettings" id="LabelSettings_wfvms"]
-font_color = Color(1, 0, 0.196078, 1)
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ex2ql"]
+color = Color(0, 0.65098, 0.819608, 1)
+thickness = 2
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -185,6 +186,7 @@ label_settings = SubResource("LabelSettings_a51gv")
 
 [node name="HSeparator" type="HSeparator" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ex2ql")
 
 [node name="MarginContainer" type="MarginContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 layout_mode = 2
@@ -213,13 +215,6 @@ unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "~/Fuji/ or C:/Users/Maddy/documents/ or any other valid path."
 
-[node name="BadPath" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "Please enter a valid directory."
-label_settings = SubResource("LabelSettings_wfvms")
-
 [node name="Buttons" type="HBoxContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
@@ -234,6 +229,3 @@ text = "Confirm"
 
 [connection signal="new_selection" from="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MarginContainer/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
 [connection signal="close_attempted" from="StopInput" to="." method="_on_close_popups_attempted"]
-[connection signal="text_changed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="InstallFujiPopup" method="_on_install_path_text_changed"]
-[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Cancel" to="InstallFujiPopup" method="close"]
-[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Confirm" to="." method="new_install"]
