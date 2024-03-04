@@ -32,8 +32,15 @@ func new_install() -> void:
 	var install_name = %InstallName.text
 	var install_path = %InstallPath.text # .get_basename().get_base_dir()
 	
+	var mhi = MatterhornInternet.new()
+	
+	mhi.get_c64_download_url()
+	
+	# Keep this at the end so that the user knows what's happening.
+	close_popups()
+	
 
-func _on_close_popups_attempted():
+func close_popups():
 	for child in get_children():
 		if "Popups" in child.get_groups():
 			child.visible = false

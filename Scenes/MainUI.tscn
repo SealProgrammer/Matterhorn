@@ -215,7 +215,6 @@ placeholder_text = "~/Fuji/ or C:/Users/Maddy/documents/ or any other valid path
 
 [node name="BadPath" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 text = "Please enter a valid directory."
 label_settings = SubResource("LabelSettings_wfvms")
@@ -233,7 +232,7 @@ layout_mode = 2
 text = "Confirm"
 
 [connection signal="new_selection" from="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MarginContainer/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
-[connection signal="close_attempted" from="StopInput" to="." method="_on_close_popups_attempted"]
+[connection signal="close_attempted" from="StopInput" to="." method="close_popups"]
 [connection signal="text_changed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="InstallFujiPopup" method="_on_install_path_text_changed"]
 [connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Cancel" to="InstallFujiPopup" method="close"]
 [connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Confirm" to="." method="new_install"]
