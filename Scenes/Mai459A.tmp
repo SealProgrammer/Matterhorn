@@ -1,0 +1,238 @@
+[gd_scene load_steps=16 format=3 uid="uid://bpy1unhc3431j"]
+
+[ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
+[ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
+[ext_resource type="Texture2D" uid="uid://dmac57f5v1q6j" path="res://Backgrounds/background1_blur.png" id="3_rdlrl"]
+[ext_resource type="Script" path="res://Scripts/Instances.gd" id="4_j2dj4"]
+[ext_resource type="Script" path="res://Scripts/Mods.gd" id="5_hda4r"]
+[ext_resource type="Script" path="res://Scripts/StopInput.gd" id="6_ny5vg"]
+[ext_resource type="Script" path="res://Scenes/InstallFujiPopup.gd" id="7_8fkb2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0kt58"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_iumfn"]
+font_size = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pr574"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwovn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q78bt"]
+bg_color = Color(0, 0, 0, 0.529412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ab1q"]
+bg_color = Color(0.101961, 0.101961, 0.121569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_a51gv"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_wfvms"]
+font_color = Color(1, 0, 0.196078, 1)
+
+[node name="MainUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kmsrw")
+script = ExtResource("2_nwuoh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rdlrl")
+expand_mode = 3
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="LeftSide" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+alignment = 1
+
+[node name="LogoContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Logo" type="Label" parent="MarginContainer/HBoxContainer/LeftSide/LogoContainer"]
+layout_mode = 2
+text = "Matterhorn"
+label_settings = SubResource("LabelSettings_0kt58")
+
+[node name="BottomArea" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InstancesPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
+layout_mode = 2
+text = "Instances"
+label_settings = SubResource("LabelSettings_iumfn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Instances" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_j2dj4")
+
+[node name="Placeholder" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pr574")
+
+[node name="RightSide" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_uwovn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/RightSide"]
+layout_mode = 2
+
+[node name="Mods" type="GridContainer" parent="MarginContainer/HBoxContainer/RightSide/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_hda4r")
+
+[node name="StopInput" type="Panel" parent="." groups=["Popups"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q78bt")
+script = ExtResource("6_ny5vg")
+
+[node name="InstallFujiPopup" type="PanelContainer" parent="." groups=["Popups"]]
+editor_description = "Why not have an actual popup? Weird font scaling."
+custom_minimum_size = Vector2(700, 550)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -28.0
+offset_right = 59.5
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_1ab1q")
+script = ExtResource("7_8fkb2")
+
+[node name="MarginContainer" type="MarginContainer" parent="InstallFujiPopup"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InstallFujiPopup/MarginContainer"]
+layout_mode = 2
+
+[node name="Params" type="VBoxContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "Install Fuji"
+label_settings = SubResource("LabelSettings_a51gv")
+
+[node name="HSeparator" type="HSeparator" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="Description" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params/MarginContainer"]
+layout_mode = 2
+text = "Download and install the latest release of Fuji from Github."
+
+[node name="InstallNameHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "Installation Name"
+
+[node name="InstallName" type="LineEdit" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Epic Cool Fuji Instance ( •̀ ω •́ )b"
+
+[node name="InstallPathHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "Installation Path"
+
+[node name="InstallPath" type="LineEdit" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "~/Fuji/ or C:/Users/Maddy/documents/ or any other valid path."
+
+[node name="BadPath" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Please enter a valid directory."
+label_settings = SubResource("LabelSettings_wfvms")
+
+[node name="Buttons" type="HBoxContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Cancel" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Confirm" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Confirm"
+
+[connection signal="new_selection" from="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MarginContainer/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
+[connection signal="close_attempted" from="StopInput" to="." method="close_popups"]
+[connection signal="text_changed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="InstallFujiPopup" method="_on_install_path_text_changed"]
+[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Cancel" to="InstallFujiPopup" method="close"]
+[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Confirm" to="." method="new_install"]
