@@ -8,7 +8,7 @@ class_name MatterhornInternet extends Node
 ## Helper function to get internet stuff.
 static func get_website(base_url : String, directory: String, headers: Array = ["User-Agent: Pirulo/1.0 (Godot)","Accept: */*"]) -> String:
 	# AKA: Stuff I copied from docs.godotengine.org/en/stable/tutorials/networking/http_client_class.html#doc-http-client-class
-	# Why not just use a HTTPRequest node? Didn't want to fuck around with signals. Send in a pr if you want it fixed.
+	# Why not just use a HTTPRequest node? Didn't want to mess around with signals. Send in a pr if you want it fixed.
 
 	var err = 0
 	var http = HTTPClient.new() # Create the Client.
@@ -60,6 +60,9 @@ static func get_website(base_url : String, directory: String, headers: Array = [
 		print("We didn't get anything back, tragic. !:3")
 	#endregion
 	return ""
+
+static func download_file(url : String):
+	pass
 
 ## Fetches the download url for Celeste64-{platform}-x64.zip from the latest release of FujiAPI/Fuji Github repo.
 static func get_c64_download_url(platform : String = "Windows") -> String:

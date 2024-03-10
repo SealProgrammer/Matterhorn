@@ -1,6 +1,6 @@
 res://Scenes/MainUI.tscn
 res://Scripts/MainUI.gd
 res://matterhorn_theme.tres
+res://Scripts/MatterhornInternet.gd
 res://Scenes/Instance.tscn
 res://Scenes/Mod.tscn
-res://Scripts/MatterhornInternet.gd
