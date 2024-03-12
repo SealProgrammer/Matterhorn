@@ -1,5 +1,12 @@
 extends Control
 
+@onready var mhi = %MatterhornInternet
+
+"""
+This class is the main script for the project; it deals with
+various things, from installing new instances of Fuji to messing
+around with the window's size. This class is ~90% signal handling.
+"""
 
 func _ready():
 	# This whole thing feels haphazard but I couldn't find a better way to do it.
@@ -11,7 +18,9 @@ func _ready():
 
 	var scale_factor = screen_rect.size.x / 1920.0
 	var new_window_size = base_window_size * scale_factor
-
+	
+	
+	
 	# Set the new window size
 	DisplayServer.window_set_min_size(Vector2i(base_window_size))
 	DisplayServer.window_set_size(Vector2i(new_window_size))
@@ -19,7 +28,8 @@ func _ready():
 	
 	# Setup the stuff
 	MatterhornFileIO.write_new_config_if_not_exists()
-	print(MatterhornFileIO.get_user_data())
+	
+	MatterhornFileIO.unzip("D:/Fuji/amogus.zip")
 
 
 func center_window() -> void:
@@ -29,17 +39,60 @@ func center_window() -> void:
 	window.position = screen_rect.position + (screen_rect.size - window.get_size_with_decorations()) / 2
 
 func new_install() -> void:
-	var install_name = %InstallName.text
-	var install_path = %InstallPath.text # .get_basename().get_base_dir()
-	
-	
-	print(MatterhornInternet.get_c64_download_url())
-	
-	# Keep this at the end so that the user knows what's happening.
-	close_popups()
-	
+	mhi.get_fuji_release_url(self._on_fuji_url_found)
 
-func close_popups():
+## Callback for when we get back a Fuji url, while downloading the newest version.
+func _on_fuji_url_found(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
+	var json := JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+	
+	print(response["url"])
+	
+	var os = "Windows"
+	var architecture = "x64"
+	match %OperatingSystem.get_selected_id():
+		1:
+			os = "Linux"
+		2:
+			os = "macOS"
+		_:
+			os = "Windows" # If they selected something else somehow, just default to Windows because it has the most likely chance of being correct.
+	match %Architecture.get_selected_id():
+		1:
+			architecture = "arm"
+		_:
+			architecture = "x64"
+	
+	
+	var file_name = "Celeste64-Fuji-%s-%s.zip" % [os, architecture]
+	
+	print(file_name)
+	
+	for asset in response["assets"]:
+		if asset["name"] == file_name:
+			print("Downloading Fuji!")
+			mhi.request(asset["browser_download_url"], self._on_fuji_release_downloaded)
+
+	# mhi.request(response["url"], self._on_fuji_release_downloaded)
+
+	close_popups()
+
+## Callback for when a request to download the latest Fuji zip file has returned.
+func _on_fuji_release_downloaded(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
+	print("We are doing stuff! Downloaded Fuji, now installing...")
+	
+	print(body.get_string_from_utf8())
+	
+	var file = FileAccess.open("%s/%s.zip" % [%InstallPath.text, MatterhornHelpers.prepare_filename(%InstallName.text)], FileAccess.WRITE)
+	file.store_buffer(body)
+
+func close_popups() -> void:
 	for child in get_children():
 		if "Popups" in child.get_groups():
 			child.visible = false
+
+
+func _on_new_install_requested():
+	%StopInput.visible = true
+	%InstallFujiPopup.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bpy1unhc3431j"]
+[gd_scene load_steps=18 format=3 uid="uid://bpy1unhc3431j"]
 
 [ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
 [ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Mods.gd" id="5_hda4r"]
 [ext_resource type="Script" path="res://Scripts/StopInput.gd" id="6_ny5vg"]
 [ext_resource type="Script" path="res://Scenes/InstallFujiPopup.gd" id="7_8fkb2"]
+[ext_resource type="Script" path="res://Scripts/MatterhornInternet.gd" id="8_40gku"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0kt58"]
 font_size = 50
@@ -22,7 +23,7 @@ font_size = 20
 bg_color = Color(0, 0, 0, 0.529412)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ab1q"]
-bg_color = Color(0.101961, 0.101961, 0.121569, 1)
+bg_color = Color(0.158472, 0.158472, 0.158472, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -33,6 +34,10 @@ font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_wfvms"]
 font_color = Color(1, 0, 0.196078, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_voysw"]
+font_size = 12
+font_color = Color(0.639216, 0.639216, 0.639216, 1)
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -115,6 +120,31 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("4_j2dj4")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Install" type="Button" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_kmsrw")
+theme_type_variation = &"ButtonBlack"
+text = "Install"
+
+[node name="Import" type="Button" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_kmsrw")
+theme_type_variation = &"ButtonBlack"
+text = "Import"
+
+[node name="Edit" type="Button" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_kmsrw")
+theme_type_variation = &"ButtonBlack"
+text = "Edit
+"
+
 [node name="Placeholder" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -145,6 +175,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_q78bt")
 script = ExtResource("6_ny5vg")
 
 [node name="InstallFujiPopup" type="PanelContainer" parent="." groups=["Popups"]]
+unique_name_in_owner = true
 editor_description = "Why not have an actual popup? Weird font scaling."
 custom_minimum_size = Vector2(700, 550)
 layout_mode = 1
@@ -196,8 +227,9 @@ layout_mode = 2
 text = "Download and install the latest release of Fuji from Github."
 
 [node name="InstallNameHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+editor_description = "I retroactively changed the wording to be Instance but didn't want to change the unique names, so I'm not changing the name."
 layout_mode = 2
-text = "Installation Name"
+text = "Instance Name"
 
 [node name="InstallName" type="LineEdit" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 unique_name_in_owner = true
@@ -219,6 +251,48 @@ layout_mode = 2
 text = "Please enter a valid directory."
 label_settings = SubResource("LabelSettings_wfvms")
 
+[node name="OperatingSystemHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "Operating System"
+
+[node name="OperatingSystem" type="OptionButton" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"ButtonBlack"
+item_count = 3
+selected = 0
+allow_reselect = true
+popup/item_0/text = "Windows"
+popup/item_0/id = 0
+popup/item_1/text = "Linux"
+popup/item_1/id = 1
+popup/item_2/text = "MacOS"
+popup/item_2/id = 2
+
+[node name="ArchitectureHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "CPU Architecture
+"
+
+[node name="ArchitectureWindowsHelp" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "Only x64 is supported on windows (as of Fuji 0.5.0). There might be a newer release with ARM though, so you can try it."
+label_settings = SubResource("LabelSettings_voysw")
+
+[node name="Architecture" type="OptionButton" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"ButtonBlack"
+item_count = 2
+selected = 0
+allow_reselect = true
+popup/item_0/text = "x64"
+popup/item_0/id = 0
+popup/item_1/text = "arm"
+popup/item_1/id = 1
+
 [node name="Buttons" type="HBoxContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
@@ -231,7 +305,12 @@ text = "Cancel"
 layout_mode = 2
 text = "Confirm"
 
+[node name="MatterhornInternet" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("8_40gku")
+
 [connection signal="new_selection" from="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MarginContainer/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Install" to="." method="_on_new_install_requested"]
 [connection signal="close_attempted" from="StopInput" to="." method="close_popups"]
 [connection signal="text_changed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="InstallFujiPopup" method="_on_install_path_text_changed"]
 [connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Cancel" to="InstallFujiPopup" method="close"]

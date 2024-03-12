@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://c8oml654oxorc"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://c8oml654oxorc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0eb8f"]
 content_margin_left = 1.0
@@ -48,6 +48,38 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8rbp"]
+bg_color = Color(0.101961, 0.101961, 0.121569, 0.784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mmhf"]
+bg_color = Color(0.0470588, 0.0470588, 0.0588235, 0.784314)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oykkr"]
+bg_color = Color(0.101961, 0.101961, 0.121569, 0.784314)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wmdl"]
+bg_color = Color(0.0156863, 0.0156863, 0.0196078, 0.784314)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_7gsa6"]
 color = Color(0, 0.498039, 0.627451, 1)
 thickness = 2
@@ -81,6 +113,11 @@ Button/styles/focus = SubResource("StyleBoxFlat_0eb8f")
 Button/styles/hover = SubResource("StyleBoxFlat_55a5x")
 Button/styles/normal = SubResource("StyleBoxFlat_t3kyk")
 Button/styles/pressed = SubResource("StyleBoxFlat_qoms2")
+ButtonBlack/base_type = &"Button"
+ButtonBlack/styles/focus = SubResource("StyleBoxFlat_j8rbp")
+ButtonBlack/styles/hover = SubResource("StyleBoxFlat_3mmhf")
+ButtonBlack/styles/normal = SubResource("StyleBoxFlat_oykkr")
+ButtonBlack/styles/pressed = SubResource("StyleBoxFlat_5wmdl")
 HSeparator/styles/separator = SubResource("StyleBoxLine_7gsa6")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_i0n51")
 PanelContainerSelected/base_type = &"PanelContainer"

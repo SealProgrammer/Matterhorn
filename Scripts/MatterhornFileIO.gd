@@ -29,7 +29,7 @@ static func get_mods(directory: String) -> Array:
 	return mods
 
 ## Writes a new config file to `user://Matterhorn.json` if it does not already exist, so it should be safe to call on startup.
-static func write_new_config_if_not_exists():
+static func write_new_config_if_not_exists() -> void:
 	if !FileAccess.file_exists("user://Matterhorn.json"):
 		var file : FileAccess = FileAccess.open("user://Matterhorn.json", FileAccess.WRITE)
 		# Will probably add more to this file later.
@@ -38,7 +38,7 @@ static func write_new_config_if_not_exists():
 		}, "\t"))
 
 ## Returns an array of dicts representing the instances found in user://Matterhorn.json. Assumes that the file already exists.
-static func get_user_data():
+static func get_user_data() -> Dictionary:
 	var json : JSON = JSON.new()
 	
 	var err : Error = json.parse(FileAccess.get_file_as_string("user://Matterhorn.json"))
@@ -48,3 +48,13 @@ static func get_user_data():
 	else:
 		print("JSON Parse Error: ", json.get_error_message(), " in file user://Matterhorn.json at line ", json.get_error_line())
 
+	return {}
+
+## Unzips stuff because godot doesn't have that already??
+static func unzip(path_to_zip: String) -> void:
+	var zr = ZIPReader.new()
+	
+	if zr.open(path_to_zip) == OK:
+		# We have to go through *every single file* and unzip it individually.
+		# Would be more conveniant if we didn't have to do this.
+		print(zr.get_files())

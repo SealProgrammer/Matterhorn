@@ -11,6 +11,5 @@ func close() -> void:
 	visible = false
 
 
-
 func _on_install_path_text_changed(new_text):
 	%BadPath.visible = !DirAccess.dir_exists_absolute(new_text)
