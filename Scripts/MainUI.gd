@@ -29,7 +29,7 @@ func _ready():
 	# Setup the stuff
 	MatterhornFileIO.write_new_config_if_not_exists()
 	
-	MatterhornFileIO.unzip("D:/Fuji/amogus.zip")
+	%Instances.populate_installs_list()
 
 
 func center_window() -> void:
@@ -82,10 +82,31 @@ func _on_fuji_url_found(result: int, response_code: int, headers: Array, body: P
 func _on_fuji_release_downloaded(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
 	print("We are doing stuff! Downloaded Fuji, now installing...")
 	
-	print(body.get_string_from_utf8())
+	var path : String = "%s/%s" % [%InstallPath.text, MatterhornHelpers.prepare_filename(%InstallName.text)]
 	
-	var file = FileAccess.open("%s/%s.zip" % [%InstallPath.text, MatterhornHelpers.prepare_filename(%InstallName.text)], FileAccess.WRITE)
+	var file : FileAccess = FileAccess.open(path + ".zip", FileAccess.WRITE)
 	file.store_buffer(body)
+	
+	# This seems like a good idea and should hopefully fix a bug.
+	file.close()
+	
+	# Now unzip it.
+	MatterhornFileIO.unzip(path + ".zip")
+	
+	# Now we need to update:
+	# First, we update the config file:
+	var config = MatterhornFileIO.get_user_data()
+	config["Instances"].append({
+		"Name": %InstallName.text,
+		"Path": path
+	})
+	
+	
+	MatterhornFileIO.write_user_data(config)
+	
+	# Next, we need to update various nodes:
+	# I would give this the config as a parameter but I couldn't get it to work. Send in a PR if you want.
+	%Instances.populate_installs_list()
 
 func close_popups() -> void:
 	for child in get_children():
@@ -96,3 +117,6 @@ func close_popups() -> void:
 func _on_new_install_requested():
 	%StopInput.visible = true
 	%InstallFujiPopup.visible = true
+
+func _edit_instance():
+	pass # Replace with function body.

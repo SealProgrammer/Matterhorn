@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpy1unhc3431j"]
+[gd_scene load_steps=21 format=3 uid="uid://bpy1unhc3431j"]
 
 [ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
 [ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
@@ -23,7 +23,7 @@ font_size = 20
 bg_color = Color(0, 0, 0, 0.529412)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ab1q"]
-bg_color = Color(0.158472, 0.158472, 0.158472, 1)
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -38,6 +38,22 @@ font_color = Color(1, 0, 0.196078, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_voysw"]
 font_size = 12
 font_color = Color(0.639216, 0.639216, 0.639216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgoyk"]
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_sojfo"]
+font_size = 57
+
+[sub_resource type="LabelSettings" id="LabelSettings_u8tdk"]
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -61,7 +77,7 @@ expand_mode = 3
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MainContent" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,71 +89,72 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContent"]
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="LeftSide" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="LeftSide" type="VBoxContainer" parent="MainContent/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 alignment = 1
 
-[node name="LogoContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide"]
+[node name="LogoContainer" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Logo" type="Label" parent="MarginContainer/HBoxContainer/LeftSide/LogoContainer"]
+[node name="Logo" type="Label" parent="MainContent/HBoxContainer/LeftSide/LogoContainer"]
 layout_mode = 2
 text = "Matterhorn"
 label_settings = SubResource("LabelSettings_0kt58")
 
-[node name="BottomArea" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide"]
+[node name="BottomArea" type="HBoxContainer" parent="MainContent/HBoxContainer/LeftSide"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InstancesPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea"]
+[node name="InstancesPanel" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
 layout_mode = 2
 text = "Instances"
 label_settings = SubResource("LabelSettings_iumfn")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Instances" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer"]
+[node name="Instances" type="VBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("4_j2dj4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="Install" type="Button" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
+[node name="Install" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_kmsrw")
 theme_type_variation = &"ButtonBlack"
 text = "Install"
 
-[node name="Import" type="Button" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
+[node name="Import" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_kmsrw")
 theme_type_variation = &"ButtonBlack"
 text = "Import"
 
-[node name="Edit" type="Button" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
+[node name="Edit" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_kmsrw")
@@ -145,20 +162,20 @@ theme_type_variation = &"ButtonBlack"
 text = "Edit
 "
 
-[node name="Placeholder" type="PanelContainer" parent="MarginContainer/HBoxContainer/LeftSide/BottomArea"]
+[node name="Placeholder" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_pr574")
 
-[node name="RightSide" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+[node name="RightSide" type="PanelContainer" parent="MainContent/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_uwovn")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/RightSide"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContent/HBoxContainer/RightSide"]
 layout_mode = 2
 
-[node name="Mods" type="GridContainer" parent="MarginContainer/HBoxContainer/RightSide/ScrollContainer"]
+[node name="Mods" type="GridContainer" parent="MainContent/HBoxContainer/RightSide/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_hda4r")
@@ -177,6 +194,7 @@ script = ExtResource("6_ny5vg")
 [node name="InstallFujiPopup" type="PanelContainer" parent="." groups=["Popups"]]
 unique_name_in_owner = true
 editor_description = "Why not have an actual popup? Weird font scaling."
+visible = false
 custom_minimum_size = Vector2(700, 550)
 layout_mode = 1
 anchors_preset = 8
@@ -305,13 +323,140 @@ text = "Cancel"
 layout_mode = 2
 text = "Confirm"
 
+[node name="ImportFujiPopup" type="PanelContainer" parent="." groups=["Popups"]]
+unique_name_in_owner = true
+editor_description = "Why not have an actual popup? Weird font scaling."
+visible = false
+custom_minimum_size = Vector2(700, 550)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -28.0
+offset_right = 59.5
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_1ab1q")
+script = ExtResource("7_8fkb2")
+
+[node name="MarginContainer" type="MarginContainer" parent="ImportFujiPopup"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ImportFujiPopup/MarginContainer"]
+layout_mode = 2
+
+[node name="Params" type="VBoxContainer" parent="ImportFujiPopup/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "Import Fuji"
+label_settings = SubResource("LabelSettings_a51gv")
+
+[node name="HSeparator" type="HSeparator" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="Description" type="Label" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params/MarginContainer"]
+layout_mode = 2
+text = "Add a pre-existing instance of Fuji to Matterhorn."
+
+[node name="InstallNameHelper" type="Label" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+editor_description = "I retroactively changed the wording to be Instance but didn't want to change the unique names, so I'm not changing the name."
+layout_mode = 2
+text = "Instance Name"
+
+[node name="InstallName" type="LineEdit" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+placeholder_text = "Epic Cool Fuji Instance ( •̀ ω •́ )b"
+
+[node name="InstallPathHelper" type="Label" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "Installation Path"
+
+[node name="InstallPath" type="LineEdit" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+placeholder_text = "~/Fuji/MyInstance or C:/Users/Maddy/documents/MyInstance or any other valid path."
+
+[node name="BadPath" type="Label" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+text = "Please enter a valid directory."
+label_settings = SubResource("LabelSettings_wfvms")
+
+[node name="Buttons" type="HBoxContainer" parent="ImportFujiPopup/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Cancel" type="Button" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Confirm" type="Button" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Confirm"
+
+[node name="PleaseWait" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -21.5
+offset_right = 57.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vgoyk")
+
+[node name="MarginContainer" type="MarginContainer" parent="PleaseWait"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PleaseWait/MarginContainer"]
+layout_mode = 2
+
+[node name="Please Wait" type="Label" parent="PleaseWait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Please Wait!"
+label_settings = SubResource("LabelSettings_sojfo")
+
+[node name="SomethingsHappening" type="Label" parent="PleaseWait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Something is happening in the background."
+label_settings = SubResource("LabelSettings_u8tdk")
+
 [node name="MatterhornInternet" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("8_40gku")
 
-[connection signal="new_selection" from="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MarginContainer/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Install" to="." method="_on_new_install_requested"]
+[connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MainContent/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
+[connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Install" to="." method="_on_new_install_requested"]
 [connection signal="close_attempted" from="StopInput" to="." method="close_popups"]
 [connection signal="text_changed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="InstallFujiPopup" method="_on_install_path_text_changed"]
 [connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Cancel" to="InstallFujiPopup" method="close"]
 [connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Confirm" to="." method="new_install"]
+[connection signal="text_changed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="ImportFujiPopup" method="_on_install_path_text_changed"]
+[connection signal="pressed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons/Cancel" to="ImportFujiPopup" method="close"]
+[connection signal="pressed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons/Confirm" to="." method="_edit_instance"]

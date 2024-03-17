@@ -50,11 +50,43 @@ static func get_user_data() -> Dictionary:
 
 	return {}
 
+## Writes out the configuration to a file stored at user://Matterhorn.json
+static func write_user_data(data: Dictionary) -> void:
+	var json : JSON = JSON.new()
+	
+	var config_body : String = json.stringify(data, "\t")
+	
+	var file = FileAccess.open("user://Matterhorn.json", FileAccess.WRITE)
+	file.store_string(config_body)
+
 ## Unzips stuff because godot doesn't have that already??
 static func unzip(path_to_zip: String) -> void:
-	var zr = ZIPReader.new()
+	print("Unzipping ", path_to_zip)
 	
-	if zr.open(path_to_zip) == OK:
+	var zr : ZIPReader = ZIPReader.new()
+	var err : Error = zr.open(path_to_zip)
+	if err == OK:
 		# We have to go through *every single file* and unzip it individually.
 		# Would be more conveniant if we didn't have to do this.
 		print(zr.get_files())
+		
+		
+		for filepath in zr.get_files():
+			var zip_directory : String = path_to_zip.get_base_dir()
+		
+			var da : DirAccess = DirAccess.open(zip_directory)
+			
+			var trimmed_path : String = path_to_zip.trim_suffix(".zip")
+			
+			da.make_dir(trimmed_path)
+			
+			da = DirAccess.open(trimmed_path)
+			
+			da.make_dir_recursive(filepath.get_base_dir())
+			
+			print(trimmed_path + filepath)
+			var fa : FileAccess = FileAccess.open("%s/%s" % [trimmed_path, filepath], FileAccess.WRITE)
+			
+			fa.store_buffer(zr.read_file(filepath))
+	else:
+		print("ERROR while opening ZIP file! ", error_string(err))

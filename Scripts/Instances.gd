@@ -26,7 +26,3 @@ func select_new(instance : PanelContainer, path : String) -> void:
 	instance.set_theme_type_variation("PanelContainerSelected")
 	
 	emit_signal("new_selection", path)
-
-# TODO: Remove this
-func _ready():
-	populate_installs_list()
