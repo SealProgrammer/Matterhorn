@@ -1,21 +1,22 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpy1unhc3431j"]
+[gd_scene load_steps=23 format=3 uid="uid://bpy1unhc3431j"]
 
 [ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
 [ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
 [ext_resource type="Texture2D" uid="uid://dmac57f5v1q6j" path="res://Backgrounds/background1_blur.png" id="3_rdlrl"]
 [ext_resource type="Script" path="res://Scripts/Instances.gd" id="4_j2dj4"]
+[ext_resource type="PackedScene" uid="uid://l0o6w07s27ir" path="res://Scenes/MainMenuButton.tscn" id="5_71uqk"]
 [ext_resource type="Script" path="res://Scripts/Mods.gd" id="5_hda4r"]
 [ext_resource type="Script" path="res://Scripts/StopInput.gd" id="6_ny5vg"]
-[ext_resource type="Script" path="res://Scenes/InstallFujiPopup.gd" id="7_8fkb2"]
+[ext_resource type="Script" path="res://Scripts/InstallFujiPopup.gd" id="7_8fkb2"]
 [ext_resource type="Script" path="res://Scripts/MatterhornInternet.gd" id="8_40gku"]
+[ext_resource type="Script" path="res://Scripts/ImportFujiPopup.gd" id="8_kdtcg"]
+[ext_resource type="Script" path="res://Scripts/PleaseWait.gd" id="8_ubgt1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0kt58"]
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_iumfn"]
 font_size = 20
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pr574"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwovn"]
 
@@ -143,29 +144,45 @@ layout_mode = 2
 [node name="Install" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("1_kmsrw")
 theme_type_variation = &"ButtonBlack"
 text = "Install"
 
 [node name="Import" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("1_kmsrw")
 theme_type_variation = &"ButtonBlack"
 text = "Import"
 
 [node name="Edit" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("1_kmsrw")
 theme_type_variation = &"ButtonBlack"
 text = "Edit
 "
 
-[node name="Placeholder" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea"]
+[node name="Buttons" type="VBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_pr574")
+
+[node name="Play" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+layout_mode = 2
+size_flags_vertical = 0
+label = "Play Celeste 64"
+
+[node name="InstallMods" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+layout_mode = 2
+size_flags_vertical = 0
+label = "Install Mods"
+
+[node name="MHSettings" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+layout_mode = 2
+size_flags_vertical = 0
+label = "Matterhorn Settings"
+
+[node name="MHSettings2" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+layout_mode = 2
+size_flags_vertical = 0
+label = "Launch TrenchBroom"
 
 [node name="RightSide" type="PanelContainer" parent="MainContent/HBoxContainer"]
 layout_mode = 2
@@ -194,7 +211,6 @@ script = ExtResource("6_ny5vg")
 [node name="InstallFujiPopup" type="PanelContainer" parent="." groups=["Popups"]]
 unique_name_in_owner = true
 editor_description = "Why not have an actual popup? Weird font scaling."
-visible = false
 custom_minimum_size = Vector2(700, 550)
 layout_mode = 1
 anchors_preset = 8
@@ -263,7 +279,7 @@ unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "~/Fuji/ or C:/Users/Maddy/documents/ or any other valid path."
 
-[node name="BadPath" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+[node name="BadPathInstall" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Please enter a valid directory."
@@ -315,12 +331,14 @@ popup/item_1/id = 1
 layout_mode = 2
 alignment = 2
 
-[node name="Cancel" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+[node name="InstallCancel" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "Cancel"
 
-[node name="Confirm" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+[node name="InstallConfirm" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
+disabled = true
 text = "Confirm"
 
 [node name="ImportFujiPopup" type="PanelContainer" parent="." groups=["Popups"]]
@@ -343,7 +361,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_1ab1q")
-script = ExtResource("7_8fkb2")
+script = ExtResource("8_kdtcg")
 
 [node name="MarginContainer" type="MarginContainer" parent="ImportFujiPopup"]
 layout_mode = 2
@@ -398,19 +416,28 @@ layout_mode = 2
 text = "Please enter a valid directory."
 label_settings = SubResource("LabelSettings_wfvms")
 
+[node name="NotFujiDirectory" type="Label" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Params"]
+visible = false
+layout_mode = 2
+text = "This doesn't look like a Fuji directory. It will be added anyway, but here be dragons."
+label_settings = SubResource("LabelSettings_wfvms")
+
 [node name="Buttons" type="HBoxContainer" parent="ImportFujiPopup/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="Cancel" type="Button" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+[node name="ImportCancel" type="Button" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "Cancel"
 
-[node name="Confirm" type="Button" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+[node name="ImportConfirm" type="Button" parent="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+disabled = true
 text = "Confirm"
 
-[node name="PleaseWait" type="PanelContainer" parent="."]
+[node name="PleaseWait" type="PanelContainer" parent="." groups=["Popups"]]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -424,6 +451,7 @@ offset_bottom = 21.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vgoyk")
+script = ExtResource("8_ubgt1")
 
 [node name="MarginContainer" type="MarginContainer" parent="PleaseWait"]
 layout_mode = 2
@@ -443,9 +471,32 @@ label_settings = SubResource("LabelSettings_sojfo")
 
 [node name="SomethingsHappening" type="Label" parent="PleaseWait/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
 text = "Something is happening in the background."
 label_settings = SubResource("LabelSettings_u8tdk")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PleaseWait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SplashHeader" type="Label" parent="PleaseWait/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Did You Know?"
+label_settings = SubResource("LabelSettings_u8tdk")
+horizontal_alignment = 1
+
+[node name="SplashBody" type="Label" parent="PleaseWait/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+text = "This feature only exists to let you know that Matterhorn hasn't frozen. "
+label_settings = SubResource("LabelSettings_u8tdk")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="RefreshSplash" type="Timer" parent="PleaseWait"]
+wait_time = 10.0
+autostart = true
 
 [node name="MatterhornInternet" type="Node" parent="."]
 unique_name_in_owner = true
@@ -453,10 +504,11 @@ script = ExtResource("8_40gku")
 
 [connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MainContent/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
 [connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Install" to="." method="_on_new_install_requested"]
+[connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Import" to="." method="_on_import_install_requested"]
 [connection signal="close_attempted" from="StopInput" to="." method="close_popups"]
 [connection signal="text_changed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="InstallFujiPopup" method="_on_install_path_text_changed"]
-[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Cancel" to="InstallFujiPopup" method="close"]
-[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/Confirm" to="." method="new_install"]
+[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/InstallCancel" to="InstallFujiPopup" method="close"]
+[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/InstallConfirm" to="." method="new_install"]
 [connection signal="text_changed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="ImportFujiPopup" method="_on_install_path_text_changed"]
-[connection signal="pressed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons/Cancel" to="ImportFujiPopup" method="close"]
-[connection signal="pressed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons/Confirm" to="." method="_edit_instance"]
+[connection signal="pressed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons/ImportCancel" to="ImportFujiPopup" method="close"]
+[connection signal="timeout" from="PleaseWait/RefreshSplash" to="." method="_on_refresh_splash_timeout"]

@@ -1,0 +1,66 @@
+[
+	{
+		"Header": "Did You Know?",
+		"Body": "Celeste 64 was made in roughly a week!"
+	},
+	{
+		"Header": "Did You Know?",
+		"Body": "Fuji began development on January 30th- 1 day after the source release of Celeste 64!"
+	},
+	{
+		"Header": "Tip",
+		"Body": "You can import older versions of Fuji by pressing \"Import\" below the Instance list."
+	},
+	{
+		"Header": "Tip",
+		"Body": "The most recent version of Fuji is always available by pressing \"Download\" below the Instance list."
+	},
+	{
+		"Header": "Did You Know?",
+		"Body": "Celeste 64 was released for Celeste's 6 year anniversary!"
+	},
+	{
+		"Header": "Trivia",
+		"Body": "Madeline's full name is canonically 'Madeline McButts'!"
+	},
+	{
+		"Header": "Tip",
+		"Body": "If you dash and then jump quickly, you can go farther than normal!"
+	},
+	{
+		"Header": "Trivia",
+		"Body": "Madeline's 2-dash hair color was originally green!"
+	},
+	{
+		"Header": "Did You Know?",
+		"Body": "Matterhorn is made in the Godot game engine!"
+	},
+	{
+		"Header": "Trivia",
+		"Body": "This feature only exists to let you know that Matterhorn hasn't frozen. "
+	},
+	{
+		"Header": "Did You Know?",
+		"Body": "Celeste 64 was mapped using TrenchBroom, a commonly used tool for making Quake maps."
+	},
+	{
+		"Header": "Did You Know?",
+		"Body": "You can add your own splashes by submitting a pull request (or by editing the local files yourself)."
+	},
+	{
+		"Header": "Tip",
+		"Body": "If you run at full speed, turn around, and jump, you go higher! (In C64, that is. YMMV in real life.)"
+	},
+	{
+		"Header": "Did You Know?",
+		"Body": "GDScript, the language Matterhorn is written in, is not very good at file IO and doesn't even have a function to unzip a folder. Sorry, I just wanted to rant for a second."
+	},
+	{
+		"Header": "Tips",
+		"Body": "Jumping before a moving platform stops will let you keep the velocity, shooting off at high speeds!"
+	},
+	{
+		"Header": "Joke",
+		"Body": "Why did Madeline climb Celeste Mountain? Because she heard the summit was the peak of comedy!"
+	}
+]

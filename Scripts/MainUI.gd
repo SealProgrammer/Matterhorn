@@ -1,11 +1,16 @@
 extends Control
 
 @onready var mhi = %MatterhornInternet
+var allowing_close : bool = true
+
+var splashes : Array = []
 
 """
 This class is the main script for the project; it deals with
 various things, from installing new instances of Fuji to messing
 around with the window's size. This class is ~90% signal handling.
+This class will also deal with miscellanious things, such as
+holding trivia, etc.
 """
 
 func _ready():
@@ -30,19 +35,27 @@ func _ready():
 	MatterhornFileIO.write_new_config_if_not_exists()
 	
 	%Instances.populate_installs_list()
+	
+	# Now we get the splashes; probably a good idea to store these.
+	splashes = MatterhornFileIO.get_splashes()
 
-
+## Centers... the window... what did you expect?
 func center_window() -> void:
 	var window = get_window()
 	var screen_rect = DisplayServer.screen_get_usable_rect(window.current_screen)
 
 	window.position = screen_rect.position + (screen_rect.size - window.get_size_with_decorations()) / 2
 
+## Called when a new install is requested.
 func new_install() -> void:
+	close_popups()
+	%PleaseWait.open()
+	allowing_close = false
+
 	mhi.get_fuji_release_url(self._on_fuji_url_found)
 
 ## Callback for when we get back a Fuji url, while downloading the newest version.
-func _on_fuji_url_found(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
+func _on_fuji_url_found(_result: int, _response_code: int, _headers: Array, body: PackedByteArray) -> void:
 	var json := JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
@@ -76,10 +89,8 @@ func _on_fuji_url_found(result: int, response_code: int, headers: Array, body: P
 
 	# mhi.request(response["url"], self._on_fuji_release_downloaded)
 
-	close_popups()
-
 ## Callback for when a request to download the latest Fuji zip file has returned.
-func _on_fuji_release_downloaded(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
+func _on_fuji_release_downloaded(_result: int, _response_code: int, _headers: Array, body: PackedByteArray) -> void:
 	print("We are doing stuff! Downloaded Fuji, now installing...")
 	
 	var path : String = "%s/%s" % [%InstallPath.text, MatterhornHelpers.prepare_filename(%InstallName.text)]
@@ -107,16 +118,29 @@ func _on_fuji_release_downloaded(result: int, response_code: int, headers: Array
 	# Next, we need to update various nodes:
 	# I would give this the config as a parameter but I couldn't get it to work. Send in a PR if you want.
 	%Instances.populate_installs_list()
+	
+	%PleaseWait.close()
+	allowing_close = true
 
 func close_popups() -> void:
-	for child in get_children():
-		if "Popups" in child.get_groups():
-			child.visible = false
+	if allowing_close:
+		for child in get_children():
+			if "Popups" in child.get_groups():
+				child.visible = false
 
 
 func _on_new_install_requested():
 	%StopInput.visible = true
 	%InstallFujiPopup.visible = true
 
+func _on_import_install_requested():
+	%StopInput.visible = true
+	%ImportFujiPopup.visible = true
+
 func _edit_instance():
-	pass # Replace with function body.
+	pass
+
+func _on_refresh_splash_timeout():
+	var new : Dictionary = splashes.pick_random()
+	%SplashHeader.text = new["Header"]
+	%SplashBody.text = new["Body"]

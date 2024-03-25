@@ -52,9 +52,7 @@ static func get_user_data() -> Dictionary:
 
 ## Writes out the configuration to a file stored at user://Matterhorn.json
 static func write_user_data(data: Dictionary) -> void:
-	var json : JSON = JSON.new()
-	
-	var config_body : String = json.stringify(data, "\t")
+	var config_body : String = JSON.stringify(data, "\t")
 	
 	var file = FileAccess.open("user://Matterhorn.json", FileAccess.WRITE)
 	file.store_string(config_body)
@@ -90,3 +88,6 @@ static func unzip(path_to_zip: String) -> void:
 			fa.store_buffer(zr.read_file(filepath))
 	else:
 		print("ERROR while opening ZIP file! ", error_string(err))
+
+static func get_splashes() -> Array:
+	return JSON.parse_string(FileAccess.get_file_as_string("res://splashes.json"))
