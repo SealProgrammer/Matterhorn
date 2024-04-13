@@ -19,7 +19,6 @@ func request(url: String, callback_on_completed: Callable) -> void:
 	http_request = HTTPRequest.new()
 	add_child(http_request)
 	
-	# And now, back to your regularly-scheduled copy-pasted-from-godot-docs programming.
 	http_request.request_completed.connect(callback_on_completed)
 	
 	var error = http_request.request(url)

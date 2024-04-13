@@ -10,7 +10,7 @@ This class is the main script for the project; it deals with
 various things, from installing new instances of Fuji to messing
 around with the window's size. This class is ~90% signal handling.
 This class will also deal with miscellanious things, such as
-holding trivia, etc.
+holding loaded trivia, etc.
 """
 
 func _ready():
@@ -62,20 +62,10 @@ func _on_fuji_url_found(_result: int, _response_code: int, _headers: Array, body
 	
 	print(response["url"])
 	
-	var os = "Windows"
-	var architecture = "x64"
-	match %OperatingSystem.get_selected_id():
-		1:
-			os = "Linux"
-		2:
-			os = "macOS"
-		_:
-			os = "Windows" # If they selected something else somehow, just default to Windows because it has the most likely chance of being correct.
-	match %Architecture.get_selected_id():
-		1:
-			architecture = "arm"
-		_:
-			architecture = "x64"
+	# Hopefully they don't change the conventions for this again. 0.6 went from "Windows" to "win" among others.
+	var config = MatterhornFileIO.get_user_data()
+	var os = config["OS"]
+	var architecture = config["Architecture"]
 	
 	
 	var file_name = "Celeste64-Fuji-%s-%s.zip" % [os, architecture]
@@ -86,14 +76,19 @@ func _on_fuji_url_found(_result: int, _response_code: int, _headers: Array, body
 		if asset["name"] == file_name:
 			print("Downloading Fuji!")
 			mhi.request(asset["browser_download_url"], self._on_fuji_release_downloaded)
-
+			return
+	
+	print("There was not a file available from GitHub.")
+	print(response["assets"])
+	assert(false) # Temporary until I fix it.
+	
 	# mhi.request(response["url"], self._on_fuji_release_downloaded)
 
 ## Callback for when a request to download the latest Fuji zip file has returned.
 func _on_fuji_release_downloaded(_result: int, _response_code: int, _headers: Array, body: PackedByteArray) -> void:
 	print("We are doing stuff! Downloaded Fuji, now installing...")
 	
-	var path : String = "%s/%s" % [%InstallPath.text, MatterhornHelpers.prepare_filename(%InstallName.text)]
+	var path : String = "%s/%s" % [%NewInstanceLocation.text, MatterhornHelpers.prepare_filename(%InstallName.text)]
 	
 	var file : FileAccess = FileAccess.open(path + ".zip", FileAccess.WRITE)
 	file.store_buffer(body)
@@ -109,7 +104,8 @@ func _on_fuji_release_downloaded(_result: int, _response_code: int, _headers: Ar
 	var config = MatterhornFileIO.get_user_data()
 	config["Instances"].append({
 		"Name": %InstallName.text,
-		"Path": path
+		"Path": path,
+		"Special": []
 	})
 	
 	

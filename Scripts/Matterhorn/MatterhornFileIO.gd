@@ -34,8 +34,17 @@ static func write_new_config_if_not_exists() -> void:
 		var file : FileAccess = FileAccess.open("user://Matterhorn.json", FileAccess.WRITE)
 		# Will probably add more to this file later.
 		file.store_string(JSON.stringify({
-			"Instances": []
-		}, "\t"))
+			"Instances": [
+				{
+					"Name": "Global Installation",
+					"Path": "N/A",
+					"Special": [
+						"Global",
+						"NoDelete"
+					]
+				}
+			]
+		}, "\t", false))
 
 ## Returns an array of dicts representing the instances found in user://Matterhorn.json. Assumes that the file already exists.
 static func get_user_data() -> Dictionary:
@@ -52,7 +61,7 @@ static func get_user_data() -> Dictionary:
 
 ## Writes out the configuration to a file stored at user://Matterhorn.json
 static func write_user_data(data: Dictionary) -> void:
-	var config_body : String = JSON.stringify(data, "\t")
+	var config_body : String = JSON.stringify(data, "\t", false)
 	
 	var file = FileAccess.open("user://Matterhorn.json", FileAccess.WRITE)
 	file.store_string(config_body)
@@ -86,8 +95,35 @@ static func unzip(path_to_zip: String) -> void:
 			var fa : FileAccess = FileAccess.open("%s/%s" % [trimmed_path, filepath], FileAccess.WRITE)
 			
 			fa.store_buffer(zr.read_file(filepath))
+
+		zr.close()
+
+		# Now delete the zip
+		# I figure globalizing it is probably fine.
+		OS.move_to_trash(ProjectSettings.globalize_path(path_to_zip))
 	else:
 		print("ERROR while opening ZIP file! ", error_string(err))
 
+## Returns an array of splash text (like Minecraft's yellow text) for use in the loading screen.
 static func get_splashes() -> Array:
 	return JSON.parse_string(FileAccess.get_file_as_string("res://splashes.json"))
+
+## Gets the AppData folder. No promises that this works for MacOS, I can't test there *and* the docs for Foster only mention where it is on Linux and Windows *and* the dotnet thing doesn't say where it is! Annoying AF.
+static func get_fuji_appdata_folder():
+	"""
+	So, an explaination of why this shit is what I chose to use:
+	Godot doesn't have a way of getting the AppData folder. Fine, I'll do it myself.
+	I narrowed down where the appdata is found (It is a thing in dotnet)
+	I then searched github to find where it came from. I didn't find anything.
+	I gave up.
+	So then I asked chatgpt what it would output instead!
+	Don't trust this very much :3 it probably won't work on MacOS. I think the others are *fiiiine* though. Probably.
+	"""
+	var userdata : Dictionary = get_user_data()
+	var path : String = "%APPDATA%/Celeste64"
+	match userdata["Platform"]:
+		"linux":
+			path = "~/.local/share/Celeste64"
+		"osx":
+			path = "~/Library/Application Support/Celeste64"
+	return path

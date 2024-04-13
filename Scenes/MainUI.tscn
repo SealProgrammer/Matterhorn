@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bpy1unhc3431j"]
+[gd_scene load_steps=22 format=3 uid="uid://bpy1unhc3431j"]
 
 [ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
 [ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Mods.gd" id="5_hda4r"]
 [ext_resource type="Script" path="res://Scripts/StopInput.gd" id="6_ny5vg"]
 [ext_resource type="Script" path="res://Scripts/InstallFujiPopup.gd" id="7_8fkb2"]
-[ext_resource type="Script" path="res://Scripts/MatterhornInternet.gd" id="8_40gku"]
+[ext_resource type="Script" path="res://Scripts/Matterhorn/MatterhornInternet.gd" id="8_40gku"]
 [ext_resource type="Script" path="res://Scripts/ImportFujiPopup.gd" id="8_kdtcg"]
 [ext_resource type="Script" path="res://Scripts/PleaseWait.gd" id="8_ubgt1"]
 
@@ -35,10 +35,6 @@ font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_wfvms"]
 font_color = Color(1, 0, 0.196078, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_voysw"]
-font_size = 12
-font_color = Color(0.639216, 0.639216, 0.639216, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgoyk"]
 bg_color = Color(0.156863, 0.156863, 0.156863, 1)
@@ -199,6 +195,7 @@ script = ExtResource("5_hda4r")
 
 [node name="StopInput" type="Panel" parent="." groups=["Popups"]]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,6 +208,7 @@ script = ExtResource("6_ny5vg")
 [node name="InstallFujiPopup" type="PanelContainer" parent="." groups=["Popups"]]
 unique_name_in_owner = true
 editor_description = "Why not have an actual popup? Weird font scaling."
+visible = false
 custom_minimum_size = Vector2(700, 550)
 layout_mode = 1
 anchors_preset = 8
@@ -274,58 +272,27 @@ placeholder_text = "Epic Cool Fuji Instance ( •̀ ω •́ )b"
 layout_mode = 2
 text = "Installation Path"
 
-[node name="InstallPath" type="LineEdit" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+[node name="FileSelects" type="HBoxContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+layout_mode = 2
+
+[node name="NewInstanceLocation" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects"]
 unique_name_in_owner = true
 layout_mode = 2
-placeholder_text = "~/Fuji/ or C:/Users/Maddy/documents/ or any other valid path."
+size_flags_horizontal = 2
+text = "No File Path Selected."
 
-[node name="BadPathInstall" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
-unique_name_in_owner = true
+[node name="NativeDialogsOpener" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects"]
 layout_mode = 2
-text = "Please enter a valid directory."
-label_settings = SubResource("LabelSettings_wfvms")
-
-[node name="OperatingSystemHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
-layout_mode = 2
-text = "Operating System"
-
-[node name="OperatingSystem" type="OptionButton" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 10
+size_flags_vertical = 4
 theme_type_variation = &"ButtonBlack"
-item_count = 3
-selected = 0
-allow_reselect = true
-popup/item_0/text = "Windows"
-popup/item_0/id = 0
-popup/item_1/text = "Linux"
-popup/item_1/id = 1
-popup/item_2/text = "MacOS"
-popup/item_2/id = 2
-
-[node name="ArchitectureHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
-layout_mode = 2
-text = "CPU Architecture
+text = "Select Directory
 "
 
-[node name="ArchitectureWindowsHelp" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
-layout_mode = 2
-text = "Only x64 is supported on windows (as of Fuji 0.5.0). There might be a newer release with ARM though, so you can try it."
-label_settings = SubResource("LabelSettings_voysw")
-
-[node name="Architecture" type="OptionButton" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-theme_type_variation = &"ButtonBlack"
-item_count = 2
-selected = 0
-allow_reselect = true
-popup/item_0/text = "x64"
-popup/item_0/id = 0
-popup/item_1/text = "arm"
-popup/item_1/id = 1
+[node name="PathOpener" type="NativeFileDialog" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
+title = "Open a Directory"
+file_mode = 2
+access = 2
 
 [node name="Buttons" type="HBoxContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -340,6 +307,11 @@ unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 text = "Confirm"
+
+[node name="InstallationPathDialog" type="NativeFileDialog" parent="InstallFujiPopup"]
+title = "Open a Directory"
+file_mode = 2
+access = 2
 
 [node name="ImportFujiPopup" type="PanelContainer" parent="." groups=["Popups"]]
 unique_name_in_owner = true
@@ -506,7 +478,8 @@ script = ExtResource("8_40gku")
 [connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Install" to="." method="_on_new_install_requested"]
 [connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Import" to="." method="_on_import_install_requested"]
 [connection signal="close_attempted" from="StopInput" to="." method="close_popups"]
-[connection signal="text_changed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="InstallFujiPopup" method="_on_install_path_text_changed"]
+[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects/NativeDialogsOpener" to="InstallFujiPopup/MarginContainer/VBoxContainer/Params/PathOpener" method="show"]
+[connection signal="dir_selected" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/PathOpener" to="InstallFujiPopup" method="_on_path_opener_dir_selected"]
 [connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/InstallCancel" to="InstallFujiPopup" method="close"]
 [connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/InstallConfirm" to="." method="new_install"]
 [connection signal="text_changed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="ImportFujiPopup" method="_on_install_path_text_changed"]
