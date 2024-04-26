@@ -7,17 +7,17 @@ static func get_mods(directory: String) -> Array:
 	
 	if dir:
 		dir.list_dir_begin()
-		var file_name = dir.get_next()
+		var file_name : String = dir.get_next()
 
 		while file_name != "":
 			if dir.current_is_dir():
 				# If we're here, a mod has been found.
-				var json = JSON.new()
+				var json := JSON.new()
 				
 				var err : Error = json.parse(FileAccess.get_file_as_string("%s/mods/%s/Fuji.json" % [directory, file_name]))
 				
 				if err == OK:
-					var data = json.data
+					var data : Dictionary = json.data
 					mods.append(data)
 				else:
 					print("JSON Parse Error: ", json.get_error_message(), " in file ", directory, "/mods/", file_name, " at line ", json.get_error_line())
@@ -28,23 +28,9 @@ static func get_mods(directory: String) -> Array:
 		print_debug(error_string(DirAccess.get_open_error()))
 	return mods
 
-## Writes a new config file to `user://Matterhorn.json` if it does not already exist, so it should be safe to call on startup.
-static func write_new_config_if_not_exists() -> void:
-	if !FileAccess.file_exists("user://Matterhorn.json"):
-		var file : FileAccess = FileAccess.open("user://Matterhorn.json", FileAccess.WRITE)
-		# Will probably add more to this file later.
-		file.store_string(JSON.stringify({
-			"Instances": [
-				{
-					"Name": "Global Installation",
-					"Path": "N/A",
-					"Special": [
-						"Global",
-						"NoDelete"
-					]
-				}
-			]
-		}, "\t", false))
+## Tests if there is a config already written.
+static func config_exists() -> bool:
+	return FileAccess.file_exists("user://Matterhorn.json")
 
 ## Returns an array of dicts representing the instances found in user://Matterhorn.json. Assumes that the file already exists.
 static func get_user_data() -> Dictionary:
@@ -63,7 +49,7 @@ static func get_user_data() -> Dictionary:
 static func write_user_data(data: Dictionary) -> void:
 	var config_body : String = JSON.stringify(data, "\t", false)
 	
-	var file = FileAccess.open("user://Matterhorn.json", FileAccess.WRITE)
+	var file := FileAccess.open("user://Matterhorn.json", FileAccess.WRITE)
 	file.store_string(config_body)
 
 ## Unzips stuff because godot doesn't have that already??
@@ -109,7 +95,7 @@ static func get_splashes() -> Array:
 	return JSON.parse_string(FileAccess.get_file_as_string("res://splashes.json"))
 
 ## Gets the AppData folder. No promises that this works for MacOS, I can't test there *and* the docs for Foster only mention where it is on Linux and Windows *and* the dotnet thing doesn't say where it is! Annoying AF.
-static func get_fuji_appdata_folder():
+static func get_fuji_appdata_folder() -> String:
 	"""
 	So, an explaination of why this shit is what I chose to use:
 	Godot doesn't have a way of getting the AppData folder. Fine, I'll do it myself.
@@ -117,13 +103,15 @@ static func get_fuji_appdata_folder():
 	I then searched github to find where it came from. I didn't find anything.
 	I gave up.
 	So then I asked chatgpt what it would output instead!
-	Don't trust this very much :3 it probably won't work on MacOS. I think the others are *fiiiine* though. Probably.
+	Don't trust this very much it probably won't work on MacOS. I think the others are *fiiiine* though. Probably.
 	"""
 	var userdata : Dictionary = get_user_data()
-	var path : String = "%APPDATA%/Celeste64"
-	match userdata["Platform"]:
+	var path : String = ""
+	match userdata["OS"]:
 		"linux":
 			path = "~/.local/share/Celeste64"
 		"osx":
 			path = "~/Library/Application Support/Celeste64"
+		_:
+			path = OS.get_environment("APPDATA") + "/Celeste64"
 	return path

@@ -1,50 +1,23 @@
 extends Control
 
-@onready var mhi = %MatterhornInternet
+@onready var mhi : MatterhornInternet = %MatterhornInternet
 var allowing_close : bool = true
 
 var splashes : Array = []
 
 """
-This class is the main script for the project; it deals with
-various things, from installing new instances of Fuji to messing
-around with the window's size. This class is ~90% signal handling.
+This class is the main script for the main menu; it deals with
+various things throughout the main ui. It is ~90% signal handling.
 This class will also deal with miscellanious things, such as
 holding loaded trivia, etc.
 """
 
-func _ready():
-	# This whole thing feels haphazard but I couldn't find a better way to do it.
-	var window : Window = get_window()
-	var screen : int = window.current_screen
-
-	var screen_rect = DisplayServer.screen_get_usable_rect(screen)
-	var base_window_size = Vector2(1100, 600)
-
-	var scale_factor = screen_rect.size.x / 1920.0
-	var new_window_size = base_window_size * scale_factor
-	
-	
-	
-	# Set the new window size
-	DisplayServer.window_set_min_size(Vector2i(base_window_size))
-	DisplayServer.window_set_size(Vector2i(new_window_size))
-	center_window()
-	
-	# Setup the stuff
-	MatterhornFileIO.write_new_config_if_not_exists()
-	
+## Stuff to do at the begginning. I was writing docstrings for everything else and this felt out of place w/o one.
+func _ready() -> void:
 	%Instances.populate_installs_list()
 	
 	# Now we get the splashes; probably a good idea to store these.
 	splashes = MatterhornFileIO.get_splashes()
-
-## Centers... the window... what did you expect?
-func center_window() -> void:
-	var window = get_window()
-	var screen_rect = DisplayServer.screen_get_usable_rect(window.current_screen)
-
-	window.position = screen_rect.position + (screen_rect.size - window.get_size_with_decorations()) / 2
 
 ## Called when a new install is requested.
 func new_install() -> void:
@@ -58,21 +31,21 @@ func new_install() -> void:
 func _on_fuji_url_found(_result: int, _response_code: int, _headers: Array, body: PackedByteArray) -> void:
 	var json := JSON.new()
 	json.parse(body.get_string_from_utf8())
-	var response = json.get_data()
+	var response : Dictionary = json.get_data()
 	
 	print(response["url"])
 	
 	# Hopefully they don't change the conventions for this again. 0.6 went from "Windows" to "win" among others.
-	var config = MatterhornFileIO.get_user_data()
-	var os = config["OS"]
-	var architecture = config["Architecture"]
+	var config : Dictionary = MatterhornFileIO.get_user_data()
+	var os : String = config["OS"]
+	var architecture : String = config["Architecture"]
 	
 	
-	var file_name = "Celeste64-Fuji-%s-%s.zip" % [os, architecture]
+	var file_name : String = "Celeste64-Fuji-%s-%s.zip" % [os, architecture]
 	
 	print(file_name)
 	
-	for asset in response["assets"]:
+	for asset : Dictionary in response["assets"]:
 		if asset["name"] == file_name:
 			print("Downloading Fuji!")
 			mhi.request(asset["browser_download_url"], self._on_fuji_release_downloaded)
@@ -101,7 +74,7 @@ func _on_fuji_release_downloaded(_result: int, _response_code: int, _headers: Ar
 	
 	# Now we need to update:
 	# First, we update the config file:
-	var config = MatterhornFileIO.get_user_data()
+	var config : Dictionary = MatterhornFileIO.get_user_data()
 	config["Instances"].append({
 		"Name": %InstallName.text,
 		"Path": path,
@@ -125,18 +98,26 @@ func close_popups() -> void:
 				child.visible = false
 
 
-func _on_new_install_requested():
+func _on_new_install_requested() -> void:
 	%StopInput.visible = true
 	%InstallFujiPopup.visible = true
 
-func _on_import_install_requested():
+func _on_import_install_requested() -> void:
 	%StopInput.visible = true
 	%ImportFujiPopup.visible = true
 
-func _edit_instance():
+func _edit_instance() -> void:
 	pass
 
-func _on_refresh_splash_timeout():
+func _on_refresh_splash_timeout() -> void:
 	var new : Dictionary = splashes.pick_random()
 	%SplashHeader.text = new["Header"]
 	%SplashBody.text = new["Body"]
+
+## Called when a new instance is selected.
+func _on_instances_new_selection(data: Dictionary) -> void:
+	# TODO: update Play button to work and stuff
+	if data["Special"].has("Global"):
+		pass
+	else:
+		pass

@@ -6,7 +6,7 @@ class_name MatterhornInternet extends Node
 
 var http_request : HTTPRequest
 
-func _ready():
+func _ready() -> void:
 	http_request = HTTPRequest.new()
 	add_child(http_request)
 
@@ -21,10 +21,10 @@ func request(url: String, callback_on_completed: Callable) -> void:
 	
 	http_request.request_completed.connect(callback_on_completed)
 	
-	var error = http_request.request(url)
+	var error := http_request.request(url)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
 ## A shortcut to get the FujiAPI/Fuji release.
-func get_fuji_release_url(callback_on_fuji_url_found: Callable):
+func get_fuji_release_url(callback_on_fuji_url_found: Callable) -> void:
 	request("https://api.github.com/repos/FujiAPI/Fuji/releases/latest", callback_on_fuji_url_found)

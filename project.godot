@@ -15,11 +15,16 @@ config/description="Manage and install Celeste 64: Fragments of the Mountain mod
 config/version="0.1"
 run/main_scene="res://Scenes/MainUI.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.png"
+config/icon="res://icon.svg"
 
 [autoload]
 
 Info="*res://Scripts/Info.gd"
+
+[debug]
+
+gdscript/warnings/unassigned_variable=2
+gdscript/warnings/untyped_declaration=2
 
 [display]
 
@@ -32,7 +37,7 @@ window/stretch/aspect="expand"
 [file_customization]
 
 folder_colors={
-"res://Backgrounds/": "yellow",
+"res://Images/": "pink",
 "res://Scenes/": "blue",
 "res://Scripts/": "purple"
 }

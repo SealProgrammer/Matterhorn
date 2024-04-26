@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
 [ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
-[ext_resource type="Texture2D" uid="uid://dmac57f5v1q6j" path="res://Backgrounds/background1_blur.png" id="3_rdlrl"]
+[ext_resource type="Texture2D" uid="uid://dmac57f5v1q6j" path="res://Images/Backgrounds/background1_blur.png" id="3_rdlrl"]
 [ext_resource type="Script" path="res://Scripts/Instances.gd" id="4_j2dj4"]
 [ext_resource type="PackedScene" uid="uid://l0o6w07s27ir" path="res://Scenes/MainMenuButton.tscn" id="5_71uqk"]
 [ext_resource type="Script" path="res://Scripts/Mods.gd" id="5_hda4r"]
@@ -160,24 +160,26 @@ text = "Edit
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Play" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+[node name="ButtonPlay" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
 layout_mode = 2
 size_flags_vertical = 0
 label = "Play Celeste 64"
 
-[node name="InstallMods" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+[node name="ButtonInstallMods" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
 layout_mode = 2
 size_flags_vertical = 0
 label = "Install Mods"
 
-[node name="MHSettings" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+[node name="ButtonMHSettings" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
 layout_mode = 2
 size_flags_vertical = 0
 label = "Matterhorn Settings"
 
-[node name="MHSettings2" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+[node name="ButtonTrenchbroom" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
 layout_mode = 2
 size_flags_vertical = 0
+tooltip_text = "You need to specify a TrenchBroom path in Matterhorn's settings."
+mouse_default_cursor_shape = 8
 label = "Launch TrenchBroom"
 
 [node name="RightSide" type="PanelContainer" parent="MainContent/HBoxContainer"]
@@ -474,6 +476,7 @@ autostart = true
 unique_name_in_owner = true
 script = ExtResource("8_40gku")
 
+[connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="." method="_on_instances_new_selection"]
 [connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MainContent/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
 [connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Install" to="." method="_on_new_install_requested"]
 [connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/InstancesPanel/VBoxContainer/HBoxContainer/Import" to="." method="_on_import_install_requested"]
