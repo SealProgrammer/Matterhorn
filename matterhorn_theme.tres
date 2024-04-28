@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://c8oml654oxorc"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://c8oml654oxorc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0eb8f"]
 content_margin_left = 1.0
@@ -96,6 +96,21 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k4im7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_674vn"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_467j2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6u4m3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r754v"]
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_7gsa6"]
 color = Color(0.8, 0.8, 0.8, 1)
 thickness = 2
@@ -105,7 +120,6 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
-bg_color = Color(0.101961, 0.101961, 0.121569, 0.784314)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -122,6 +136,15 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fiq7h"]
+draw_center = false
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.196078)
+shadow_size = 5
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2vf43"]
 
 [resource]
@@ -134,8 +157,18 @@ ButtonBlack/styles/focus = SubResource("StyleBoxFlat_j8rbp")
 ButtonBlack/styles/hover = SubResource("StyleBoxFlat_3mmhf")
 ButtonBlack/styles/normal = SubResource("StyleBoxFlat_oykkr")
 ButtonBlack/styles/pressed = SubResource("StyleBoxFlat_5wmdl")
+ButtonTransparent/base_type = &"Button"
+ButtonTransparent/colors/font_outline_color = Color(0, 0, 0, 1)
+ButtonTransparent/constants/outline_size = 2
+ButtonTransparent/styles/disabled = SubResource("StyleBoxEmpty_k4im7")
+ButtonTransparent/styles/focus = SubResource("StyleBoxFlat_674vn")
+ButtonTransparent/styles/hover = SubResource("StyleBoxEmpty_467j2")
+ButtonTransparent/styles/normal = SubResource("StyleBoxEmpty_6u4m3")
+ButtonTransparent/styles/pressed = SubResource("StyleBoxEmpty_r754v")
 HSeparator/styles/separator = SubResource("StyleBoxLine_7gsa6")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_i0n51")
 PanelContainerSelected/base_type = &"PanelContainer"
 PanelContainerSelected/styles/panel = SubResource("StyleBoxFlat_wgnjg")
+PanelContainerShadow/base_type = &"PanelContainer"
+PanelContainerShadow/styles/panel = SubResource("StyleBoxFlat_fiq7h")
 VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_2vf43")

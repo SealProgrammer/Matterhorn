@@ -37,7 +37,7 @@ func _on_fuji_url_found(_result: int, _response_code: int, _headers: Array, body
 	
 	# Hopefully they don't change the conventions for this again. 0.6 went from "Windows" to "win" among others.
 	var config : Dictionary = MatterhornFileIO.get_user_data()
-	var os : String = config["OS"]
+	var os : String = MatterhornFileIO.get_os()
 	var architecture : String = config["Architecture"]
 	
 	

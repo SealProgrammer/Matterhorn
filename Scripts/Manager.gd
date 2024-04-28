@@ -1,5 +1,8 @@
 extends Control
 
+@export_file("*.tscn") var onboarding_node_path: String
+@export_file("*.tscn") var main_node_path: String
+
 
 func _ready() -> void:
 	# This whole thing feels haphazard but I couldn't find a better way to do it.
@@ -18,6 +21,20 @@ func _ready() -> void:
 	DisplayServer.window_set_min_size(Vector2i(base_window_size))
 	DisplayServer.window_set_size(Vector2i(new_window_size))
 	center_window()
+	
+	var path: String = ""
+	if MatterhornFileIO.config_exists():
+		var main_node: Node = load(main_node_path).instantiate()
+		add_child(main_node)
+	else:
+		var onboarding_node: Node = load(onboarding_node_path).instantiate()
+		onboarding_node.connect("completed", restart)
+		add_child(onboarding_node)
+
+
+## Restarts the application.
+func restart() -> void:
+	get_tree().reload_current_scene()
 
 ## Centers... the window... what did you expect?
 func center_window() -> void:

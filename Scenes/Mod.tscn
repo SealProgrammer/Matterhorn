@@ -1,19 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://dedxj1iwo372w"]
+[gd_scene load_steps=8 format=3 uid="uid://dedxj1iwo372w"]
 
+[ext_resource type="Material" uid="uid://ds46o8dhwwttx" path="res://frosted_glass_shader.tres" id="1_5aeym"]
 [ext_resource type="Script" path="res://Scripts/Mod.gd" id="1_5r0x7"]
+[ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_esfgp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_04uug"]
 font_size = 20
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7kj2t"]
 font_size = 20
-font_color = Color(0.458824, 0.458824, 0.458824, 1)
+font_color = Color(0.666667, 0.666667, 0.666667, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yhwcl"]
 font_size = 14
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_exx58"]
 font_size = 12
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Mod" type="PanelContainer"]
 anchors_preset = 15
@@ -23,41 +33,47 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+theme = ExtResource("1_esfgp")
+theme_type_variation = &"PanelContainerShadow"
 script = ExtResource("1_5r0x7")
 metadata/_edit_use_anchors_ = true
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+material = ExtResource("1_5aeym")
 layout_mode = 2
 
-[node name="TitleBar" type="GridContainer" parent="GridContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TitleBar" type="GridContainer" parent="PanelContainer/GridContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="Name" type="Label" parent="GridContainer/TitleBar"]
+[node name="Name" type="Label" parent="PanelContainer/GridContainer/TitleBar"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Mod Name"
 label_settings = SubResource("LabelSettings_04uug")
 
-[node name="Dot" type="Label" parent="GridContainer/TitleBar"]
+[node name="Dot" type="Label" parent="PanelContainer/GridContainer/TitleBar"]
 layout_mode = 2
 text = "•"
 label_settings = SubResource("LabelSettings_7kj2t")
 
-[node name="Version" type="Label" parent="GridContainer/TitleBar"]
+[node name="Version" type="Label" parent="PanelContainer/GridContainer/TitleBar"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0.0.0
 "
 label_settings = SubResource("LabelSettings_7kj2t")
 
-[node name="Author" type="Label" parent="GridContainer"]
+[node name="Author" type="Label" parent="PanelContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Mod Author"
 label_settings = SubResource("LabelSettings_yhwcl")
 
-[node name="Description" type="Label" parent="GridContainer"]
+[node name="Description" type="Label" parent="PanelContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2

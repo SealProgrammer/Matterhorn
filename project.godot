@@ -13,7 +13,7 @@ config_version=5
 config/name="Matterhorn"
 config/description="Manage and install Celeste 64: Fragments of the Mountain mods with ease."
 config/version="0.1"
-run/main_scene="res://Scenes/MainUI.tscn"
+run/main_scene="res://Scenes/Manager.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -37,6 +37,7 @@ window/stretch/aspect="expand"
 [file_customization]
 
 folder_colors={
+"res://Fonts/": "green",
 "res://Images/": "pink",
 "res://Scenes/": "blue",
 "res://Scripts/": "purple"

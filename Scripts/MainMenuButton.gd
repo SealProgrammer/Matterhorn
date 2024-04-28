@@ -2,9 +2,9 @@
 
 @export var label: String = "Press Me!":
 	get:
-		return $MarginContainer/Text.text
+		return %Text.text
 	set(val):
-		$MarginContainer/Text.text = val
+		%Text.text = val
 
 signal selected
 

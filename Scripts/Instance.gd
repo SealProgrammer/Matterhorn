@@ -2,20 +2,11 @@ extends PanelContainer
 
 signal selected(object: PanelContainer, data: Dictionary)
 
-#var instance_name : String = "Epic Fuji Installation  (•̀ ω •́ )b":
-	#set(val):
-		#%Name.text = val
-		#instance_name = val
-#
-#var instance_path : String:
-	#set(val):
-		#%Path.text = "[i][color=727272][font_size=12]%s[/font_size][/color][/i]" % val
-		#instance_path = val
-
 var data : Dictionary:
 	set(val):
 		%Name.text = val["Name"]
-		%Path.text = "[i][color=727272][font_size=12]%s[/font_size][/color][/i]" % val["Path"]
+		# This feels wrong. All I wanted was italics but I had to write everything else out too.
+		%Path.text = "[outline_color=black][outline_size=2][i][color=aaaaaa][font_size=12]%s[/font_size][/color][/i][/outline_size][/outline_color]" % val["Path"]
 		data = val
 
 var cur_selected : bool = false

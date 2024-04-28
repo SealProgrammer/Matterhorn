@@ -94,6 +94,18 @@ static func unzip(path_to_zip: String) -> void:
 static func get_splashes() -> Array:
 	return JSON.parse_string(FileAccess.get_file_as_string("res://splashes.json"))
 
+## Gets the OS of the user, returning a string of either "win" "osx" or "linux"
+static func get_os() -> String:
+	var os : String = ""
+	match OS.get_name():
+		"Windows":
+			os = "win"
+		"macOS":
+			os = "osx"
+		_: # If there's something else it's *probably* linux.
+			os = "linux"
+	return os
+
 ## Gets the AppData folder. No promises that this works for MacOS, I can't test there *and* the docs for Foster only mention where it is on Linux and Windows *and* the dotnet thing doesn't say where it is! Annoying AF.
 static func get_fuji_appdata_folder() -> String:
 	"""
@@ -105,9 +117,8 @@ static func get_fuji_appdata_folder() -> String:
 	So then I asked chatgpt what it would output instead!
 	Don't trust this very much it probably won't work on MacOS. I think the others are *fiiiine* though. Probably.
 	"""
-	var userdata : Dictionary = get_user_data()
 	var path : String = ""
-	match userdata["OS"]:
+	match get_os():
 		"linux":
 			path = "~/.local/share/Celeste64"
 		"osx":

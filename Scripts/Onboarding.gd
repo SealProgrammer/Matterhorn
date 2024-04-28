@@ -14,14 +14,7 @@ func _on_submit_pressed() -> void:
 			_: # Effectively just `"x64":` but I felt like some basic error protection was good.
 				arch = "x64"
 		
-		var os : String = ""
-		match OS.get_name():
-			"Windows":
-				os = "win"
-			"macOS":
-				os = "osx"
-			_: # If there's something else it's probably linux.
-				os = "linux"
+		var os: String = MatterhornFileIO.get_os()
 		
 		# Has to be on its own or it errors.
 		var global_loc : String = MatterhornFileIO.get_fuji_appdata_folder()

@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv3cttpao0xur"]
+[gd_scene load_steps=5 format=3 uid="uid://cv3cttpao0xur"]
 
+[ext_resource type="Material" uid="uid://ds46o8dhwwttx" path="res://frosted_glass_shader.tres" id="1_3w0ys"]
 [ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_4p1va"]
 [ext_resource type="Script" path="res://Scripts/Instance.gd" id="1_wsflt"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_we6vt"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Instance" type="PanelContainer"]
+material = ExtResource("1_3w0ys")
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_4p1va")
 theme_type_variation = &"PanelContainer"
@@ -18,12 +24,13 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 text = "Epic Cool Fuji Instance ( •̀ ω •́ )b"
+label_settings = SubResource("LabelSettings_we6vt")
 
 [node name="Path" type="RichTextLabel" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
-text = "[i][color=727272][font_size=12]D:/Big Games/Celeste64-Fuji[/font_size][/color][/i]"
+text = "[outline_color=black][outline_size=2][i][color=aaaaaa][font_size=12]D:/Big Games/Celeste64-Fuji[/font_size][/color][/i][/outline_size][/outline_color]"
 fit_content = true
 shortcut_keys_enabled = false
