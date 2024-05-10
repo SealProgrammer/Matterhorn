@@ -22,7 +22,6 @@ func _ready() -> void:
 	DisplayServer.window_set_size(Vector2i(new_window_size))
 	center_window()
 	
-	var path: String = ""
 	if MatterhornFileIO.config_exists():
 		var main_node: Node = load(main_node_path).instantiate()
 		add_child(main_node)

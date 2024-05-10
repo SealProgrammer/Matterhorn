@@ -4,6 +4,7 @@ extends Control
 var allowing_close : bool = true
 
 var splashes : Array = []
+var selected_instance_data : Dictionary
 
 """
 This class is the main script for the main menu; it deals with
@@ -117,7 +118,38 @@ func _on_refresh_splash_timeout() -> void:
 ## Called when a new instance is selected.
 func _on_instances_new_selection(data: Dictionary) -> void:
 	# TODO: update Play button to work and stuff
+	var play_button : PanelContainer = %ButtonPlay
+	selected_instance_data = data
 	if data["Special"].has("Global"):
-		pass
+		play_button.set_default_cursor_shape(CURSOR_FORBIDDEN)
+		play_button.set_tooltip_text("Select a non-global instance.")
 	else:
-		pass
+		play_button.set_default_cursor_shape(CURSOR_POINTING_HAND)
+		play_button.set_tooltip_text("")
+
+func _on_button_play_selected() -> void:
+	# When the user asks to play the game
+	# First, check to see if it is a playable instance:
+	if selected_instance_data == {} or selected_instance_data["Special"].has("Global"):
+		return # If it isn't, return.
+	
+	print_rich("[rainbow][wave]Are YOU a MacOS user and this code worked??? Please tell me so that I stop worrying! Are YOU a Linux user wondering why you got this message? I wrote this code to hopefully work on both. Are YOU a Windows user that got this message? Then oh shoot I did a bad when programming.[/rainbow][/wave]")
+	print(selected_instance_data)
+
+	# stupid way to put it, me.
+	# way to be supportive of my writing, me.
+
+	
+	match MatterhornFileIO.get_os():
+		"win":
+			# Fuji devs can't stay consistant with naming conventions 🙄
+			for filename in DirAccess.get_files_at(selected_instance_data["Path"]):
+				if filename.ends_with(".exe"):
+					OS.create_process("%s/%s" % [selected_instance_data["Path"],filename], [])
+					return
+		_: # Linux or osx (an entire 37% sure that osx will work)
+			# Pray to the FSM, God, Buddha, or whatever that they don't add another file without a file extension or all hell will break loose.
+			for filename in DirAccess.get_files_at(selected_instance_data["Path"]):
+				if not "." in filename:
+					OS.create_process("%s/%s" % [selected_instance_data["Path"],filename], [])
+					return

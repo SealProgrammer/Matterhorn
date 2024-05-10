@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
 [ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
-[ext_resource type="Texture2D" uid="uid://cpaok5jtfsimh" path="res://Images/Backgrounds/background1.png" id="3_lrf8b"]
+[ext_resource type="Texture2D" uid="uid://dgkovcsxa0ihu" path="res://Images/Backgrounds/background2.png" id="3_u8ils"]
 [ext_resource type="Material" uid="uid://ds46o8dhwwttx" path="res://frosted_glass_shader.tres" id="4_ejfbl"]
 [ext_resource type="Script" path="res://Scripts/Instances.gd" id="4_j2dj4"]
 [ext_resource type="PackedScene" uid="uid://l0o6w07s27ir" path="res://Scenes/MainMenuButton.tscn" id="5_71uqk"]
@@ -76,7 +76,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_lrf8b")
+texture = ExtResource("3_u8ils")
 expand_mode = 3
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
@@ -194,8 +194,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ButtonPlay" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "Select a non-Global instance."
+mouse_default_cursor_shape = 8
 label = "Play Celeste 64"
 
 [node name="ButtonInstallMods" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons" instance=ExtResource("5_71uqk")]
@@ -514,6 +517,7 @@ script = ExtResource("8_40gku")
 [connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MainContent/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
 [connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer/Install" to="." method="_on_new_install_requested"]
 [connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer2/Import" to="." method="_on_import_install_requested"]
+[connection signal="selected" from="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons/ButtonPlay" to="." method="_on_button_play_selected"]
 [connection signal="close_attempted" from="StopInput" to="." method="close_popups"]
 [connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects/NativeDialogsOpener" to="InstallFujiPopup/MarginContainer/VBoxContainer/Params/PathOpener" method="show"]
 [connection signal="dir_selected" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/PathOpener" to="InstallFujiPopup" method="_on_path_opener_dir_selected"]
