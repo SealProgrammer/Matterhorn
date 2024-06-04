@@ -19,6 +19,12 @@ func _ready() -> void:
 	
 	# Now we get the splashes; probably a good idea to store these.
 	splashes = MatterhornFileIO.get_splashes()
+	
+	var mhi : MatterhornInternet = %MatterhornInternet
+	
+	print(mhi.fix_gbapi_prefix({
+		"_sHello": "_sHi!"
+	}))
 
 ## Called when a new install is requested.
 func new_install() -> void:
@@ -117,7 +123,6 @@ func _on_refresh_splash_timeout() -> void:
 
 ## Called when a new instance is selected.
 func _on_instances_new_selection(data: Dictionary) -> void:
-	# TODO: update Play button to work and stuff
 	var play_button : PanelContainer = %ButtonPlay
 	selected_instance_data = data
 	if data["Special"].has("Global"):
@@ -133,7 +138,6 @@ func _on_button_play_selected() -> void:
 	if selected_instance_data == {} or selected_instance_data["Special"].has("Global"):
 		return # If it isn't, return.
 	
-	print_rich("[rainbow][wave]Are YOU a MacOS user and this code worked??? Please tell me so that I stop worrying! Are YOU a Linux user wondering why you got this message? I wrote this code to hopefully work on both. Are YOU a Windows user that got this message? Then oh shoot I did a bad when programming.[/rainbow][/wave]")
 	print(selected_instance_data)
 
 	# stupid way to put it, me.
@@ -152,4 +156,5 @@ func _on_button_play_selected() -> void:
 			for filename in DirAccess.get_files_at(selected_instance_data["Path"]):
 				if not "." in filename:
 					OS.create_process("%s/%s" % [selected_instance_data["Path"],filename], [])
+					print_rich("[rainbow][wave]Are YOU a MacOS user and this code worked??? Please tell me so that I stop worrying! Are YOU a Linux user wondering why you got this message? I wrote this code to hopefully work on both. Are YOU a Windows user that got this message? Then oh shoot I did a bad when programming.[/rainbow][/wave]")
 					return

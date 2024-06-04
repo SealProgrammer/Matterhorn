@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://qstjjidebe7v"]
+
+[ext_resource type="Script" path="res://Scripts/mod_install_ui.gd" id="1_wxaak"]
+[ext_resource type="Script" path="res://Scripts/Matterhorn/MatterhornInternet.gd" id="2_dkd52"]
+
+[node name="ModInstallUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wxaak")
+
+[node name="FlowContainer" type="FlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MatterhornInternetMain" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_dkd52")

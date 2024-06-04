@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bpy1unhc3431j"]
+[gd_scene load_steps=28 format=3 uid="uid://bpy1unhc3431j"]
 
 [ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_kmsrw"]
 [ext_resource type="Script" path="res://Scripts/MainUI.gd" id="2_nwuoh"]
@@ -30,15 +30,33 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q78bt"]
 bg_color = Color(0, 0, 0, 0.529412)
 
+[sub_resource type="LabelSettings" id="LabelSettings_a51gv"]
+font_size = 20
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wdkea"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fpsjn"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_drvbi"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1vnj8"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ab1q"]
 bg_color = Color(0.156863, 0.156863, 0.156863, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="LabelSettings" id="LabelSettings_a51gv"]
-font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_wfvms"]
 font_color = Color(1, 0, 0.196078, 1)
@@ -122,67 +140,67 @@ label_settings = SubResource("LabelSettings_0kt58")
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea"]
+[node name="Shadow" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"PanelContainerShadow"
 
-[node name="InstancesPanel" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer"]
+[node name="InstancesPanel" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow"]
 material = ExtResource("4_ejfbl")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer"]
 layout_mode = 2
 text = "Instances"
 label_settings = SubResource("LabelSettings_iumfn")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Instances" type="VBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/ScrollContainer"]
+[node name="Instances" type="VBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("4_j2dj4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"PanelContainerShadow"
 
-[node name="Install" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="Install" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"ButtonTransparent"
 text = "Install"
 
-[node name="PanelContainer2" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"PanelContainerShadow"
 
-[node name="Import" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer2"]
+[node name="Import" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"ButtonTransparent"
 text = "Import"
 
-[node name="PanelContainer3" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"PanelContainerShadow"
 
-[node name="Edit" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer3"]
+[node name="Edit" type="Button" parent="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"ButtonTransparent"
@@ -248,6 +266,7 @@ script = ExtResource("6_ny5vg")
 unique_name_in_owner = true
 editor_description = "Why not have an actual popup? Weird font scaling."
 visible = false
+material = ExtResource("4_ejfbl")
 custom_minimum_size = Vector2(700, 550)
 layout_mode = 1
 anchors_preset = 8
@@ -263,7 +282,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_1ab1q")
 script = ExtResource("7_8fkb2")
 
 [node name="MarginContainer" type="MarginContainer" parent="InstallFujiPopup"]
@@ -296,11 +314,13 @@ theme_override_constants/margin_bottom = 20
 [node name="Description" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params/MarginContainer"]
 layout_mode = 2
 text = "Download and install the latest release of Fuji from Github."
+label_settings = SubResource("LabelSettings_wdkea")
 
 [node name="InstallNameHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 editor_description = "I retroactively changed the wording to be Instance but didn't want to change the unique names, so I'm not changing the name."
 layout_mode = 2
 text = "Instance Name"
+label_settings = SubResource("LabelSettings_fpsjn")
 
 [node name="InstallName" type="LineEdit" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 unique_name_in_owner = true
@@ -310,6 +330,7 @@ placeholder_text = "Epic Cool Fuji Instance ( •̀ ω •́ )b"
 [node name="InstallPathHelper" type="Label" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 layout_mode = 2
 text = "Installation Path"
+label_settings = SubResource("LabelSettings_drvbi")
 
 [node name="FileSelects" type="HBoxContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params"]
 layout_mode = 2
@@ -319,12 +340,24 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 text = "No File Path Selected."
+label_settings = SubResource("LabelSettings_1vnj8")
 
-[node name="NativeDialogsOpener" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects"]
+[node name="PanelContainer" type="PanelContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects"]
+layout_mode = 2
+theme_type_variation = &"PanelContainerShadow"
+
+[node name="MarginContainer" type="MarginContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="NativeDialogsOpener" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
-theme_type_variation = &"ButtonBlack"
+theme_type_variation = &"ButtonTransparent"
 text = "Select Directory
 "
 
@@ -337,13 +370,37 @@ access = 2
 layout_mode = 2
 alignment = 2
 
-[node name="InstallCancel" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+[node name="ShadowCancel" type="PanelContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+theme_type_variation = &"PanelContainerShadow"
+
+[node name="MarginContainer" type="MarginContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/ShadowCancel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="InstallCancel" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/ShadowCancel/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"ButtonTransparent"
 text = "Cancel"
 
-[node name="InstallConfirm" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+[node name="ShadowConfirm" type="PanelContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_type_variation = &"PanelContainerShadow"
+
+[node name="MarginContainer" type="MarginContainer" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/ShadowConfirm"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="InstallConfirm" type="Button" parent="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/ShadowConfirm/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"ButtonTransparent"
 disabled = true
 text = "Confirm"
 
@@ -513,16 +570,16 @@ autostart = true
 unique_name_in_owner = true
 script = ExtResource("8_40gku")
 
-[connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="." method="_on_instances_new_selection"]
-[connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MainContent/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
-[connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer/Install" to="." method="_on_new_install_requested"]
-[connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/PanelContainer/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer2/Import" to="." method="_on_import_install_requested"]
+[connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="." method="_on_instances_new_selection"]
+[connection signal="new_selection" from="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/ScrollContainer/Instances" to="MainContent/HBoxContainer/RightSide/ScrollContainer/Mods" method="_on_new_instance_selection"]
+[connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer/Install" to="." method="_on_new_install_requested"]
+[connection signal="pressed" from="MainContent/HBoxContainer/LeftSide/BottomArea/Shadow/InstancesPanel/VBoxContainer/HBoxContainer/PanelContainer2/Import" to="." method="_on_import_install_requested"]
 [connection signal="selected" from="MainContent/HBoxContainer/LeftSide/BottomArea/Buttons/ButtonPlay" to="." method="_on_button_play_selected"]
 [connection signal="close_attempted" from="StopInput" to="." method="close_popups"]
-[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects/NativeDialogsOpener" to="InstallFujiPopup/MarginContainer/VBoxContainer/Params/PathOpener" method="show"]
+[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/FileSelects/PanelContainer/MarginContainer/NativeDialogsOpener" to="InstallFujiPopup/MarginContainer/VBoxContainer/Params/PathOpener" method="show"]
 [connection signal="dir_selected" from="InstallFujiPopup/MarginContainer/VBoxContainer/Params/PathOpener" to="InstallFujiPopup" method="_on_path_opener_dir_selected"]
-[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/InstallCancel" to="InstallFujiPopup" method="close"]
-[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/InstallConfirm" to="." method="new_install"]
+[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/ShadowCancel/MarginContainer/InstallCancel" to="InstallFujiPopup" method="close"]
+[connection signal="pressed" from="InstallFujiPopup/MarginContainer/VBoxContainer/Buttons/ShadowConfirm/MarginContainer/InstallConfirm" to="." method="new_install"]
 [connection signal="text_changed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Params/InstallPath" to="ImportFujiPopup" method="_on_install_path_text_changed"]
 [connection signal="pressed" from="ImportFujiPopup/MarginContainer/VBoxContainer/Buttons/ImportCancel" to="ImportFujiPopup" method="close"]
 [connection signal="timeout" from="PleaseWait/RefreshSplash" to="." method="_on_refresh_splash_timeout"]

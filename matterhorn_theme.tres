@@ -158,6 +158,7 @@ ButtonBlack/styles/hover = SubResource("StyleBoxFlat_3mmhf")
 ButtonBlack/styles/normal = SubResource("StyleBoxFlat_oykkr")
 ButtonBlack/styles/pressed = SubResource("StyleBoxFlat_5wmdl")
 ButtonTransparent/base_type = &"Button"
+ButtonTransparent/colors/font_disabled_color = Color(0.592157, 0.592157, 0.592157, 1)
 ButtonTransparent/colors/font_outline_color = Color(0, 0, 0, 1)
 ButtonTransparent/constants/outline_size = 2
 ButtonTransparent/styles/disabled = SubResource("StyleBoxEmpty_k4im7")

@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://qstjjidebe7v"]
+
+[ext_resource type="Theme" uid="uid://c8oml654oxorc" path="res://matterhorn_theme.tres" id="1_swuoq"]
+[ext_resource type="Script" path="res://Scripts/mod_install_ui.gd" id="1_wxaak"]
+[ext_resource type="Texture2D" uid="uid://dgkovcsxa0ihu" path="res://Images/Backgrounds/background2.png" id="2_5x5xo"]
+[ext_resource type="Script" path="res://Scripts/Matterhorn/MatterhornInternet.gd" id="2_dkd52"]
+[ext_resource type="Material" uid="uid://ds46o8dhwwttx" path="res://frosted_glass_shader.tres" id="4_atuws"]
+
+[node name="ModInstallUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_swuoq")
+script = ExtResource("1_wxaak")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5x5xo")
+expand_mode = 3
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VSplitContainer"]
+material = ExtResource("4_atuws")
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer/PanelContainer"]
+material = ExtResource("4_atuws")
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VSplitContainer/PanelContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"ButtonTransparent"
+text = "Back"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="MarginContainer/VSplitContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Shadow" type="PanelContainer" parent="MarginContainer/VSplitContainer/ScrollContainer/FlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"PanelContainerShadow"
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VSplitContainer/ScrollContainer/FlowContainer/Shadow"]
+material = ExtResource("4_atuws")
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="MatterhornInternetMain" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_dkd52")
